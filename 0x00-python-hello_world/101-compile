@@ -1,17 +1,21 @@
 #!/bin/bash
 
-# Get the Python file name from the environment variable
-PYFILE=$PYFILE
+# Check if PYFILE environment variable is set
+if [[ -z "$PYFILE" ]]; then
+  echo "PYFILE environment variable not set."
+  exit 1
+fi
 
-# Append "c" to the file name to create the compiled file name
-PYFILEC="${PYFILE%.*}.pyc"
+# Append 'c' to the file extension to create the output filename
+output_file="${PYFILE}c"
 
-# Compile the Python file using the "python" command
-python -m compileall $PYFILE
+# Compile the Python script
+python -m py_compile "$PYFILE"
 
-# Move the compiled file to the desired location
-mv "${PYFILE}__pycache__/${PYFILEC}" "${PYFILEC}"
-
-# Remove the __pycache__ directory
-rm -rf "${PYFILE}__pycache__"
+# Check if compilation was successful
+if [[ $? -eq 0 ]]; then
+  echo "Compilation successful. Output file: $output_file"
+else
+  echo "Compilation failed."
+fi
 
