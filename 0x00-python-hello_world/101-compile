@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Get the Python file name from the environment variable
+PYFILE=$PYFILE
+
+# Append "c" to the file name to create the compiled file name
+PYFILEC="${PYFILE%.*}.pyc"
+
+# Compile the Python file using the "python" command
+python -m compileall $PYFILE
+
+# Move the compiled file to the desired location
+mv "${PYFILE}__pycache__/${PYFILEC}" "${PYFILEC}"
+
+# Remove the __pycache__ directory
+rm -rf "${PYFILE}__pycache__"
+
