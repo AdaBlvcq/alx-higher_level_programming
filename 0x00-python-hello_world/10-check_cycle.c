@@ -1,20 +1,42 @@
+#include <stdio.h>
+#include <stdlib.h>
+
 /**
- * check_cycle - checks if a singly linked list has a cycle in it
- * @list: pointer to the head of the list
+ * struct listint_s - singly linked list
+ * @n: integer
+ * @next: points to the next node
  *
- * Return: 0 if there is no cycle, 1 if there is a cycle
+ * Description: singly linked list node structure for Betty style compliance
+ */
+typedef struct listint_s
+{
+	int n;
+	struct listint_s *next;
+} listint_t;
+
+/**
+ * check_cycle - Checks if a singly linked list has a cycle in it.
+ * @list: Pointer to the head of the linked list.
+ *
+ * Return: 0 if there is no cycle, 1 if there is a cycle.
  */
 int check_cycle(listint_t *list)
 {
-	listint_t *slow = list, *fast = list;
+	listint_t *slow, *fast;
+
+	if (list == NULL)
+		return (0);
+
+	slow = list;
+	fast = list->next;
 
 	while (fast && fast->next)
 	{
-		slow = slow->next;
-		fast = fast->next->next;
-
 		if (slow == fast)
 			return (1);
+
+		slow = slow->next;
+		fast = fast->next->next;
 	}
 
 	return (0);
