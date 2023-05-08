@@ -1,21 +1,10 @@
 #!/bin/bash
 
-# Check if PYFILE environment variable is set
-if [[ -z "$PYFILE" ]]; then
-  echo "PYFILE environment variable not set."
-  exit 1
-fi
+import os
+import py_compile
 
-# Append 'c' to the file extension to create the output filename
-output_file="${PYFILE}c"
+pyfile = os.environ.get('PYFILE')
 
-# Compile the Python script
-python -m py_compile "$PYFILE"
-
-# Check if compilation was successful
-if [[ $? -eq 0 ]]; then
-  echo "Compilation successful. Output file: $output_file"
-else
-  echo "Compilation failed."
-fi
-
+if pyfile:
+    output_file = f"{pyfile}c"
+    py_compile.compile(pyfile, output_file, doraise=True)
