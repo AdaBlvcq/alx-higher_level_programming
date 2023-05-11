@@ -1,14 +1,6 @@
 #!/usr/bin/python3
-
-def magic_calculation(a, b):
-
-    from magic_calculation_102 import add, sub
-
-    if a < b:
-        c = add(a, b)
-        for i in range(4, 6):
-            c = add(c, i)
-        return (c)
-
-    else:
-        return(sub(a, b))
+if __name__ == "__main__":
+    import hidden_4
+    for s in dir(hidden_4):
+        if s[:2] != "__":
+            print("{:s}".format(s))
