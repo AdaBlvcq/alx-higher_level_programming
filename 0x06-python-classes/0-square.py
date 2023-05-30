@@ -1,12 +1,6 @@
 #!/usr/bin/python3
-class Square:
-    """
-    Represents a square shape.
+Square = __import__('0-square').Square
 
-    Attributes:
-        None
-
-    Methods:
-        None
-    """
-    pass
+my_square = Square()
+print(type(my_square))
+print(my_square.__dict__)
